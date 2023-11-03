@@ -2,10 +2,12 @@ import java.util.Scanner;
 
 public class WithoutTwoZeros {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
-        scanner.close();
+        int a;
+        int b;
+        try (Scanner scanner = new Scanner(System.in)) {
+            a = scanner.nextInt();
+            b = scanner.nextInt();
+        }
 
         if (a < b - 1 || a > 2 * (b + 1)) {
             System.out.println(0);

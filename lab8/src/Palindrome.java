@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 public class Palindrome {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String word = scanner.next();
-        scanner.close();
+    public static <isPalindrome> void main(String[] args) {
+        String word = "";
+        try (Scanner scanner = new Scanner(System.in)) {
+            word = scanner.next();
+        }
 
         if (isPalindrome(word)) {
             System.out.println("YES");

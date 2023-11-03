@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class Task1 {
     public static void main(String[] args) {
-        String developerName = "Забиров"; // Замените на вашу фамилию
+        String developerName = "Забиров";
         Date taskReceivedDate = new Date();
         Date taskCompletionDate = new Date();
 

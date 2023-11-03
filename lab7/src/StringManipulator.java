@@ -12,7 +12,8 @@ public interface StringManipulator {
         }
         return result.toString();
     }
-        default String reverseString(String s) {
+
+    default String reverseString(String s) {
         StringBuilder reversed = new StringBuilder(s);
         return reversed.reverse().toString();
     }

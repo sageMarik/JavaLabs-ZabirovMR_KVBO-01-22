@@ -1,20 +1,21 @@
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main1 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        int n;
+        try (Scanner scanner = new Scanner(System.in)) {
+            do {
+                System.out.print("Введите размер массива (натуральное число больше 0): ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("Некорректный ввод. Повторите попытку: ");
+                    scanner.next();
+                }
+                n = scanner.nextInt();
+            } while (n <= 0);
+        }
         Random random = new Random();
 
-        int n;
-        do {
-            System.out.print("Введите размер массива (натуральное число больше 0): ");
-            while (!scanner.hasNextInt()) {
-                System.out.print("Некорректный ввод. Повторите попытку: ");
-                scanner.next();
-            }
-            n = scanner.nextInt();
-        } while (n <= 0);
 
         // Создаем массив из n случайных целых чисел из отрезка [0; n]
         int[] array = new int[n];
@@ -56,7 +57,5 @@ public class Main1 {
         } else {
             System.out.println("В первом массиве нет чётных элементов.");
         }
-
-        scanner.close();
     }
 }

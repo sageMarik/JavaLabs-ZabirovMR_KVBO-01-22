@@ -4,11 +4,12 @@ import java.util.Scanner;
 public class Task2 {
     public static void main(String[] args) {
         Date currentDate = new Date();
+        String inputDateStr = "";
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите дату (гггг-мм-дд): ");
-        String inputDateStr = scanner.next();
-        scanner.close();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Введите дату (гггг-мм-дд): ");
+            inputDateStr = scanner.next();
+        }
 
         Date inputDate = java.sql.Date.valueOf(inputDateStr);
 

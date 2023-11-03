@@ -15,18 +15,18 @@ public class MovableTest {
         System.out.println("Down+Left -> " + m);
 
         System.out.println("\nRectangle:\n");
-        m = new MovableRectangle(0, 0, 4, 4, 2,4);
+        m = new MovableRectangle(0, 0, 4, 4, 2, 4);
         System.out.println(m);
         m.moveRight();
         m.moveDown();
         System.out.println("Right+Down -> " + m);
 
         System.out.println("\nChanging speed for rectangle:");
-        MovableRectangle r = (MovableRectangle)m;
+        MovableRectangle r = (MovableRectangle) m;
         r.setSpeed(10, 0); // change speed of topLeft point only!
-        try{
+        try {
             r.moveDown();
-        }catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             System.out.println(e);
         }
     }
