@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BalancedParentheses/BalancedParentheses.iml" filepath="$PROJECT_DIR$/BalancedParentheses/BalancedParentheses.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/JavaLabs-ZabirovMR_KVBO-01-22-.iml" filepath="$PROJECT_DIR$/.idea/JavaLabs-ZabirovMR_KVBO-01-22-.iml" />
       <module fileurl="file://$PROJECT_DIR$/lab 1/lab 1.iml" filepath="$PROJECT_DIR$/lab 1/lab 1.iml" />
       <module fileurl="file://$PROJECT_DIR$/lab 18/lab 18.iml" filepath="$PROJECT_DIR$/lab 18/lab 18.iml" />
