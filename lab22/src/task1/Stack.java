@@ -2,7 +2,7 @@ package task1;
 
 
 public class Stack {
-    private float arr[];
+    private final float[] arr;
     private int top;
     private int capacity;
 

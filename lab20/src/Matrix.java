@@ -1,13 +1,13 @@
 public class Matrix<T extends Number> {
-    private T[][] matrix;
-    private int rows;
-    private int cols;
+    private final T[][] matrix;
+    private final int rows;
+    private final int cols;
 
+    @SuppressWarnings({"unchecked"})
     public Matrix(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        @SuppressWarnings("unchecked") T[][] array = (T[][]) new Object[rows][cols];
-        this.matrix = array;
+        this.matrix = (T[][]) new Object[rows][cols];
     }
 
     public Matrix(int rows, int cols, T[][] matrix) {
@@ -21,6 +21,10 @@ public class Matrix<T extends Number> {
         return rows == cols;
     }
 
+    private void add(T number, int col, int row) {
+        matrix[col][row] = number;
+    }
+
     public void display() {
         System.out.print("[");
         for (int row = 0; row < rows; ++row) {
@@ -31,7 +35,7 @@ public class Matrix<T extends Number> {
             System.out.print("[");
 
             for (int col = 0; col < cols; ++col) {
-                System.out.printf("%8.3f", matrix[row][col]);
+                System.out.printf("%8.3f", matrix[row][col].doubleValue());
 
                 if (col != cols - 1) {
                     System.out.print(" ");
@@ -48,8 +52,8 @@ public class Matrix<T extends Number> {
         }
     }
 
-    public Matrix transpose() {
-        Matrix result = new Matrix(cols, rows);
+    public Matrix<T> transpose() {
+        Matrix<T> result = new Matrix<>(cols, rows);
 
         for (int row = 0; row < rows; ++row) {
             for (int col = 0; col < cols; ++col) {
@@ -60,8 +64,8 @@ public class Matrix<T extends Number> {
         return result;
     }
 
-    public static Matrix subMatrix(Matrix matrix, int exclude_row, int exclude_col) {
-        Matrix result = new Matrix(matrix.rows - 1, matrix.cols - 1);
+    public static <T extends Number> Matrix<T> subMatrix(Matrix<T> matrix, int exclude_row, int exclude_col) {
+        Matrix<T> result = new Matrix<>(matrix.rows - 1, matrix.cols - 1);
 
         for (int row = 0, p = 0; row < matrix.rows; ++row) {
             if (row != exclude_row - 1) {
@@ -88,16 +92,16 @@ public class Matrix<T extends Number> {
         }
     }
 
-    private double _determinant(Matrix MT) {
+    private double _determinant(Matrix<T> MT) {
         if (MT.cols == 1) {
-            return (double) MT.matrix[0][0].doubleValue();
+            return MT.matrix[0][0].doubleValue();
         } else if (MT.cols == 2) {
             return (MT.matrix[0][0].doubleValue() * MT.matrix[1][1].doubleValue() - MT.matrix[0][1].doubleValue() * MT.matrix[1][0].doubleValue());
         } else {
             double result = 0.0;
 
             for (int col = 0; col < MT.cols; ++col) {
-                Matrix sub = subMatrix(MT, 1, col + 1);
+                Matrix<T> sub = subMatrix(MT, 1, col + 1);
 
                 result += (Math.pow(-1, 1 + col + 1) * MT.matrix[0][col].doubleValue() * _determinant(sub));
             }
@@ -106,21 +110,19 @@ public class Matrix<T extends Number> {
         }
     }
 
-    public Matrix inverse() {
+    public Matrix<T> inverse() {
         double det = determinant();
 
         if (rows != cols || det == 0.0) {
             return null;
         } else {
-            Matrix result = new Matrix(rows, cols);
+            Matrix<T> result = new Matrix<>(rows, cols);
 
             for (int row = 0; row < rows; ++row) {
                 for (int col = 0; col < cols; ++col) {
-                    Matrix sub = subMatrix(this, row + 1, col + 1);
-
-                    result.matrix[col][row] = (1.0 / det *
-                            Math.pow(-1, row + col) *
-                            _determinant(sub));
+                    Matrix<T> sub = subMatrix(this, row + 1, col + 1);
+                    Number v = 1.0 / det * Math.pow(-1, row + col) * _determinant(sub);
+                    result.add((T)v, col, row);
                 }
             }
 
